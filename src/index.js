@@ -66,12 +66,49 @@ function Pizza() {
   );
 }
 
+function Header() {
+  return <h1>Fast React Pizza CO.</h1>;
+}
+
+function Menu() {
+  return (
+    <div>
+      <h2>Our Menu</h2>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </div>
+  );
+}
+
+function Footer() {
+  const hour = new Date().getHours();
+  const openingHour = 12;
+  const closingHour = 22;
+  const isOpen = hour >= openingHour && hour < closingHour;
+
+  //   if (hour >= openingHour && hour <= closingHour) {
+  //     alert("We are open!"); // notice how we got the alert twice because React render the component twice
+  //   } else {
+  //     alert("We are closed!");
+  //   }
+
+  return (
+    <footer>
+      {new Date().toLocaleTimeString()}{" "}
+      {isOpen ? "We're currently open" : "We're currently closed"}
+    </footer>
+  );
+
+  //   return React.createElement("footer", null, "We're currently open");
+}
+
 function App() {
   return (
     <div>
-      <h1>Hello, World!</h1>
-      <Pizza />
-      <Pizza />
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
 }
