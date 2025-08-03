@@ -55,14 +55,17 @@ const pizzaData = [
  *
  */
 
-function Pizza() {
+function Pizza(props) {
   // Each component should only return one root element
   // Self-closing tags must have a closing slash (/) at the end
   return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
+    <div className="pizza">
+      <img src={props.imgURL} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price}</span>
+      </div>
     </div>
   );
 }
@@ -76,12 +79,24 @@ function Header() {
 }
 
 function Menu() {
+  // we pass data to the Pizza component using props.
+  // we pass the data as attributes to the child component from the parent component (Parent -> Menu, Child -> Pizza)
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        imgURL="pizzas/spinaci.jpg"
+        price={10}
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mozarella, mushrooms, and onion"
+        imgURL="pizzas/funghi.jpg"
+        price={12}
+      />
     </main>
   );
 }
