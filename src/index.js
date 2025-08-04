@@ -58,6 +58,11 @@ const pizzaData = [
 function Pizza(props) {
   // Each component should only return one root element
   // Self-closing tags must have a closing slash (/) at the end
+
+  if (props.pizza.soldOut) {
+    return null;
+  }
+
   return (
     <li className="pizza">
       <img src={props.pizza.photoName} alt={props.pizza.name} />
@@ -79,19 +84,36 @@ function Header() {
 }
 
 function Menu() {
-  // we pass data to the Pizza component using props.
-  // we pass the data as attributes to the child component from the parent component (Parent -> Menu, Child -> Pizza)
+  // We pass data to the Pizza component using props.
+  // We pass the data as attributes to the child component via the parent component (Parent -> Menu, Child -> Pizza)
+
+  const pizzas = pizzaData;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          // we use map function instead of forEach because map returns a new array because we need to return an array of JSX elements
-          // we use the key prop to help React identify which items have changed, are added, or are removed
-          // the key prop should be unique for each item in the list (in our case pizza's name is unique)
-          <Pizza pizza={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {pizzas.length > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            /**
+             *
+             * We use map function instead of forEach because we need to return an array
+             * of JSX elements.
+             *
+             * We use the key prop to help React identify which items have changed, are
+             * added, or are removed.
+             *
+             * the key prop should be unique for each item in the list
+             * (in our case pizza's name is unique).
+             *
+             */
+
+            <Pizza pizza={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We're still working on our menu, please come back later :)</p>
+      )}
     </main>
   );
 }
@@ -110,8 +132,19 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}{" "}
-      {isOpen ? "We're currently open" : "We're currently closed"}
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We're open until {closingHour}:00. Come visit us or order online .
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openingHour}:00 and {closingHour}
+          :00.
+        </p>
+      )}
     </footer>
   );
 
@@ -131,7 +164,7 @@ function App() {
 // React 18+ root API
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // strict mode enables react during development to run components twice to check for bugs, and check if we are using outdated APIs
+  // Strict mode enables react during development to run components twice to check for bugs, and check if we are using outdated APIs
   <React.StrictMode>
     <App />
   </React.StrictMode>
