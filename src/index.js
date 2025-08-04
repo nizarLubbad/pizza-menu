@@ -59,14 +59,14 @@ function Pizza(props) {
   // Each component should only return one root element
   // Self-closing tags must have a closing slash (/) at the end
   return (
-    <div className="pizza">
-      <img src={props.imgURL} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizza.photoName} alt={props.pizza.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizza.name}</h3>
+        <p>{props.pizza.ingredients}</p>
+        <span>${props.pizza.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -84,19 +84,14 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-        imgURL="pizzas/spinaci.jpg"
-        price={10}
-      />
-
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mozarella, mushrooms, and onion"
-        imgURL="pizzas/funghi.jpg"
-        price={12}
-      />
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          // we use map function instead of forEach because map returns a new array because we need to return an array of JSX elements
+          // we use the key prop to help React identify which items have changed, are added, or are removed
+          // the key prop should be unique for each item in the list (in our case pizza's name is unique)
+          <Pizza pizza={pizza} key={pizza.name} />
+        ))}
+      </ul>
     </main>
   );
 }
