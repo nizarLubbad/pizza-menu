@@ -92,25 +92,33 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {pizzas.length > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            /**
-             *
-             * We use map function instead of forEach because we need to return an array
-             * of JSX elements.
-             *
-             * We use the key prop to help React identify which items have changed, are
-             * added, or are removed.
-             *
-             * the key prop should be unique for each item in the list
-             * (in our case pizza's name is unique).
-             *
-             */
 
-            <Pizza pizza={pizza} key={pizza.name} />
-          ))}
-        </ul>
+      {pizzas.length > 0 ? (
+        // React Fragment is a way to group a list of children without adding extra nodes to the DOM
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              /**
+               *
+               * We use map function instead of forEach because we need to return an array
+               * of JSX elements.
+               *
+               * We use the key prop to help React identify which items have changed, are
+               * added, or are removed.
+               *
+               * the key prop should be unique for each item in the list
+               * (in our case pizza's name is unique).
+               *
+               */
+
+              <Pizza pizza={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu, please come back later :)</p>
       )}

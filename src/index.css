@@ -91,6 +91,13 @@ body {
   font-weight: 500;
 }
 
+.menu > p {
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 1.6;
+  width: 80%;
+}
+
 .pizzas {
   list-style: none;
   display: grid;
