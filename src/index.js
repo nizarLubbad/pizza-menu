@@ -55,21 +55,21 @@ const pizzaData = [
  *
  */
 
-function Pizza(props) {
+function Pizza({ pizza }) {
   // Each component should only return one root element
   // Self-closing tags must have a closing slash (/) at the end
 
-  if (props.pizza.soldOut) {
+  if (pizza.soldOut) {
     return null;
   }
 
   return (
     <li className="pizza">
-      <img src={props.pizza.photoName} alt={props.pizza.name} />
+      <img src={pizza.photoName} alt={pizza.name} />
       <div>
-        <h3>{props.pizza.name}</h3>
-        <p>{props.pizza.ingredients}</p>
-        <span>${props.pizza.price}</span>
+        <h3>{pizza.name}</h3>
+        <p>{pizza.ingredients}</p>
+        <span>${pizza.price}</span>
       </div>
     </li>
   );
@@ -146,12 +146,10 @@ function Footer() {
   //   return React.createElement("footer", null, "We're currently open");
 }
 
-function Order(props) {
+function Order({ closingHour }) {
   return (
     <div className="order">
-      <p>
-        We're open until {props.closingHour}:00. Come visit us or order online.
-      </p>
+      <p>We're open until {closingHour}:00. Come visit us or order online.</p>
       <button className="btn">Order</button>
     </div>
   );
